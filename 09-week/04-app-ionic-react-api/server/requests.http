@@ -1,0 +1,11 @@
+### Listar libros
+GET http://localhost:3000/api/books
+
+### Ver un libro
+GET http://localhost:3000/api/books/1
+
+### Crear libro
+POST http://localhost:3000/api/books
+Content-Type: application/json
+
+{ "title": "El coronel no tiene quien le escriba", "author": "Gabriel García Márquez", "year": 1961 }
