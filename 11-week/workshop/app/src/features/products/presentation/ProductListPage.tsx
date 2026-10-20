@@ -1,7 +1,10 @@
 import {
   IonButton,
   IonContent,
+  IonFab,
+  IonFabButton,
   IonHeader,
+  IonIcon,
   IonInput,
   IonList,
   IonPage,
@@ -9,6 +12,8 @@ import {
   IonToolbar,
   useIonViewWillEnter,
 } from '@ionic/react';
+
+import { add } from 'ionicons/icons';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
@@ -17,7 +22,6 @@ import { getProducts } from '../data/products-api';
 import { CATEGORIES, filterProducts, toProductView, type Product } from '../domain/product';
 import EmptyState from './EmptyState';
 import ProductCard from './ProductCard';
-
 /**
  * Pantalla: lista de productos (ruta /productos).
  *
@@ -146,9 +150,11 @@ const ProductListPage: React.FC = () => {
           </IonList>
         )}
 
-        <IonButton routerLink="/productos/nuevo" className="ion-margin">
-          Nuevo producto
-        </IonButton>
+        <IonFab slot="fixed" vertical="bottom" horizontal="end">
+          <IonFabButton routerLink="/productos/nuevo" aria-label="Nuevo producto">
+            <IonIcon icon={add} />
+          </IonFabButton>
+        </IonFab>
       </IonContent>
     </IonPage>
   );

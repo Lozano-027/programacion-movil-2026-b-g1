@@ -1,9 +1,29 @@
-/* Tema mínimo: verde institucional como color primario */
+/* Tokens de diseño · Catálogo de productos */
 :root {
-  --ion-color-primary: #009540;
-  --ion-color-primary-rgb: 0, 149, 64;
+  /* Primario: #007a33 (antes #009540, contraste 3.9:1) */
+  --ion-color-primary: #007a33;
+  --ion-color-primary-rgb: 0, 122, 51;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: #008338;
-  --ion-color-primary-tint: #1aa053;
+  --ion-color-primary-shade: #006b2d;
+  --ion-color-primary-tint: #1a8747;
+
+  --ion-color-secondary: #0163aa;
+  --ion-color-success: #2dd55b;
+  --ion-color-danger: #c5000f;
+
+  --ion-background-color: #ffffff;
+  --ion-text-color: #000000;
+  --app-text-secondary: #595959;
+
+  /* Tipografía (rem para que crezca con la letra del sistema) */
+  --app-font-sm: 0.875rem;
+  --app-font-md: 1rem;
+  --app-font-lg: 1.25rem;
+
+  /* Espacios */
+  --app-space-xs: 4px;
+  --app-space-sm: 8px;
+  --app-space-md: 16px;
+  --app-space-lg: 24px;
 }
