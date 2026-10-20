@@ -27,3 +27,17 @@
   --app-space-md: 16px;
   --app-space-lg: 24px;
 }
+
+/* Accesibilidad y responsivo (CP4) */
+.touch-target {
+  height: 44px;
+}
+
+.page-container {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.list-end-space {
+  height: 88px;
+}

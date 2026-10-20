@@ -213,6 +213,8 @@ const ProductFormPage: React.FC = () => {
                   <IonButton
                     key={option}
                     size="small"
+                    className="touch-target"
+                    aria-pressed={category === option}
                     fill={category === option ? 'solid' : 'outline'}
                     onClick={() => {
                       setCategory(option);

@@ -98,6 +98,7 @@ const ProductListPage: React.FC = () => {
           <IonRefresherContent pullingText="Deslice para recargar" refreshingText="Recargando productos…" />
         </IonRefresher>
 
+        <div className="page-container">
         <div className="ion-padding">
           <IonInput
             label="Buscar por nombre"
@@ -112,6 +113,8 @@ const ProductListPage: React.FC = () => {
               <IonButton
                 key={category || 'todas'}
                 size="small"
+                className="touch-target"
+                aria-pressed={selectedCategory === category}
                 fill={selectedCategory === category ? 'solid' : 'outline'}
                 onClick={() => setSelectedCategory(category)}
               >
@@ -161,6 +164,9 @@ const ProductListPage: React.FC = () => {
             ))}
           </IonList>
         )}
+
+        <div className="list-end-space" aria-hidden="true" />
+        </div>
 
         <IonFab slot="fixed" vertical="bottom" horizontal="end">
           <IonFabButton routerLink="/productos/nuevo" aria-label="Nuevo producto">
