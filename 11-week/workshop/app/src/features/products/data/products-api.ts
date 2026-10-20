@@ -6,7 +6,7 @@
  */
 import type { Product, ProductInput } from '../domain/product';
 import { ApiError } from './api-error';
-import { API_URL } from './config';
+import { API_URL, SIMULATE_EMPTY, SIMULATE_ERROR, SIMULATED_DELAY_MS } from './config';
 
 /**
  * YA DADO. Hace una petición a la API y devuelve el cuerpo JSON ya convertido.
@@ -41,6 +41,9 @@ export interface ProductQuery {
 
 /** YA DADO (ejemplo): GET /api/products?search=&category= */
 export async function getProducts(query: ProductQuery = {}): Promise<Product[]> {
+  if (SIMULATED_DELAY_MS > 0) await new Promise((resolve) => setTimeout(resolve, SIMULATED_DELAY_MS));
+  if (SIMULATE_ERROR) throw new ApiError('No fue posible conectar con el servidor.', null);
+  if (SIMULATE_EMPTY) return [];
   const params = new URLSearchParams();
   if (query.search) params.set('search', query.search);
   if (query.category) params.set('category', query.category);

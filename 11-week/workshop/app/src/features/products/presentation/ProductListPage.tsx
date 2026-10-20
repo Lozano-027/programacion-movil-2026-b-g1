@@ -22,6 +22,7 @@ import { getProducts } from '../data/products-api';
 import { CATEGORIES, filterProducts, toProductView, type Product } from '../domain/product';
 import EmptyState from './EmptyState';
 import ProductCard from './ProductCard';
+import ProductListSkeleton from './ProductListSkeleton';
 /**
  * Pantalla: lista de productos (ruta /productos).
  *
@@ -109,7 +110,7 @@ const ProductListPage: React.FC = () => {
           </div>
         </div>
 
-        {status === 'loading' && <p className="ion-padding">Cargando productos…</p>}
+        {status === 'loading' && <ProductListSkeleton rows={5} />}
 
         {status === 'error' && (
           <EmptyState
