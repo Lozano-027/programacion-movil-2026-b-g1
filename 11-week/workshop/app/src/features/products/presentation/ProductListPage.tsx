@@ -11,8 +11,10 @@ import {
   IonTitle,
   IonToolbar,
   useIonViewWillEnter,
+  IonRefresher,
+  IonRefresherContent,
 } from '@ionic/react';
-
+import type { RefresherEventDetail } from '@ionic/react';
 import { add } from 'ionicons/icons';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -74,6 +76,11 @@ const ProductListPage: React.FC = () => {
   const visibleProducts = filterProducts(products, { search, category: selectedCategory });
   const categoryOptions = [ALL_CATEGORIES, ...CATEGORIES];
 
+  const handleRefresh = async (event: CustomEvent<RefresherEventDetail>) => {
+    await loadProducts();
+    event.detail.complete();
+  };
+
   const clearFilters = () => {
     setSearch('');
     setSelectedCategory(ALL_CATEGORIES);
@@ -87,6 +94,10 @@ const ProductListPage: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
+        <IonRefresher slot="fixed" onIonRefresh={handleRefresh}>
+          <IonRefresherContent pullingText="Deslice para recargar" refreshingText="Recargando productos…" />
+        </IonRefresher>
+
         <div className="ion-padding">
           <IonInput
             label="Buscar por nombre"

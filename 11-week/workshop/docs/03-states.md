@@ -27,3 +27,18 @@ El servicio `getProducts` (`products-api.ts`) lee tres variables de `app/.env`. 
 | Con datos | las tres en `0` / `false`, o sin definir |
 
 Otra forma de ver el error real: detener la API (`npm run server`) y recargar la lista.
+
+## Recargar deslizando (IonRefresher)
+
+Al arrastrar la lista hacia abajo aparece "Deslice para recargar" y se vuelve a llamar a `loadProducts`. Sirve cuando la API falló o el stock cambió, sin salir de la pantalla.
+
+## Prueba automatizada
+
+Archivo: `app/src/features/products/__tests__/ProductListPage.test.tsx` (Vitest + Testing Library).
+
+| Prueba | Qué verifica |
+|---|---|
+| muestra el mensaje de error cuando la API falla | Si `getProducts` falla, aparece "No se pudo cargar" con el mensaje de conexión |
+| el botón Reintentar vuelve a pedir los productos y muestra la lista | La primera llamada falla, al tocar Reintentar la segunda devuelve "Agua mineral 600 ml" y `getProducts` se llamó 2 veces |
+
+`getProducts` se reemplaza con `vi.mock` para no depender de la API real. Resultado de `npm test`: 3 archivos, 19 pruebas pasan.
