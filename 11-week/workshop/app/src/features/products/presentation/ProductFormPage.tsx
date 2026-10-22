@@ -7,9 +7,12 @@ import {
   IonInput,
   IonLabel,
   IonPage,
+  IonSpinner,
   IonText,
   IonTitle,
   IonToolbar,
+  useIonAlert,
+  useIonToast,
 } from '@ionic/react';
 import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
@@ -42,6 +45,8 @@ const ProductFormPage: React.FC = () => {
   const isEditing = id !== undefined;
   const productId = Number(id);
   const history = useHistory();
+  const [presentToast] = useIonToast();
+  const [presentAlert] = useIonAlert();
 
   // Los campos numéricos se guardan como texto (lo que escribe la persona) y se convierten al validar.
   const [name, setName] = useState('');
@@ -110,6 +115,7 @@ const ProductFormPage: React.FC = () => {
         await createProduct(cleanInput);
         history.replace('/productos');
       }
+      void presentToast({ message: 'Producto guardado', duration: 2000, color: 'success', position: 'top' });
     } catch (error) {
       setServerError(getErrorMessage(error));
       setServerDetails(error instanceof ApiError ? error.details : []);
@@ -118,6 +124,24 @@ const ProductFormPage: React.FC = () => {
     }
   };
 
+  const hasChanges = Object.values(touchedFields).some(Boolean);
+
+  /** Cancelar con cambios sin guardar pide confirmación antes de descartarlos. */
+  const handleCancel = () => {
+    if (!hasChanges) {
+      history.goBack();
+      return;
+    }
+    void presentAlert({
+      header: '¿Descartar cambios?',
+      message: 'Los datos que escribió no se guardarán.',
+      buttons: [
+        { text: 'Seguir editando', role: 'cancel' },
+        { text: 'Descartar', role: 'destructive', handler: () => history.goBack() },
+      ],
+    });
+  };
+  
   const renderFieldError = (field: ProductField) => {
     const message = getFieldError(field);
     return message ? (
@@ -243,8 +267,24 @@ const ProductFormPage: React.FC = () => {
               </IonText>
             )}
 
-            <IonButton expand="block" className="ion-margin-top" disabled={isSaving} onClick={() => void handleSave()}>
+            <IonButton
+              expand="block"
+              className="ion-margin-top"
+              disabled={isSaving || !validation.isValid}
+              onClick={() => void handleSave()}
+            >
+              {isSaving && <IonSpinner name="crescent" slot="start" aria-hidden="true" />}
               {isSaving ? 'Guardando…' : 'Guardar'}
+            </IonButton>
+            {!validation.isValid && (
+              <IonText color="medium">
+                <p className="ion-text-center">
+                  <small>Complete los campos para poder guardar.</small>
+                </p>
+              </IonText>
+            )}
+            <IonButton expand="block" fill="clear" disabled={isSaving} onClick={handleCancel}>
+              Cancelar
             </IonButton>
           </>
         )}
