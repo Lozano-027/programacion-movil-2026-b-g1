@@ -41,3 +41,10 @@
 .list-end-space {
   height: 88px;
 }
+
+/* Botón flotante con texto (CP8: P1 dudó con el + solo) */
+.fab-with-label {
+  height: 56px;
+  --padding-start: 20px;
+  --padding-end: 20px;
+}

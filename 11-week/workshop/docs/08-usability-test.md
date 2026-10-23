@@ -42,4 +42,15 @@ Observación adicional: P2 no vio el toast "Producto guardado" porque estaba mir
 
 ## Corrección aplicada
 
-(se completa en el segundo push)
+Se corrigieron los problemas 1 y 2, que tuvieron severidad media:
+
+| Problema | Cambio | Archivo |
+|---|---|---|
+| 1. El + no decía qué hacía | El botón flotante ahora tiene ícono y texto "Agregar producto", como sugirió P1 | `ProductListPage.tsx`, `variables.css` |
+| 2. Guardar deshabilitado sin decir qué faltaba | El aviso nombra los campos pendientes: "Para guardar, revise: Precio, Stock." | `ProductFormPage.tsx` |
+
+| Botón con texto | Campos pendientes |
+|---|---|
+| ![Agregar producto](img/after-cp8-boton-agregar.png) | ![Pendientes](img/after-cp8-campos-pendientes.png) |
+
+El problema 3 (destacar el stock en el detalle) queda pendiente por ser de severidad baja.

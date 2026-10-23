@@ -2,7 +2,6 @@ import {
   IonButton,
   IonContent,
   IonFab,
-  IonFabButton,
   IonHeader,
   IonIcon,
   IonInput,
@@ -169,9 +168,10 @@ const ProductListPage: React.FC = () => {
         </div>
 
         <IonFab slot="fixed" vertical="bottom" horizontal="end">
-          <IonFabButton routerLink="/productos/nuevo" aria-label="Nuevo producto">
-            <IonIcon icon={add} />
-          </IonFabButton>
+          <IonButton routerLink="/productos/nuevo" shape="round" className="fab-with-label">
+            <IonIcon slot="start" icon={add} aria-hidden="true" />
+            Agregar producto
+          </IonButton>
         </IonFab>
       </IonContent>
     </IonPage>

@@ -38,6 +38,7 @@ function toNumber(text: string): number {
   return text.trim() === '' ? Number.NaN : Number(text);
 }
 
+const FIELD_LABELS: Record<ProductField, string> = { name: 'Nombre', price: 'Precio', stock: 'Stock', category: 'Categoría' };
 const NO_TOUCHED_FIELDS: Record<ProductField, boolean> = { name: false, price: false, category: false, stock: false };
 
 const ProductFormPage: React.FC = () => {
@@ -125,6 +126,7 @@ const ProductFormPage: React.FC = () => {
   };
 
   const hasChanges = Object.values(touchedFields).some(Boolean);
+  const pendingFields = (Object.keys(validation.errors) as ProductField[]).map((field) => FIELD_LABELS[field]);
 
   /** Cancelar con cambios sin guardar pide confirmación antes de descartarlos. */
   const handleCancel = () => {
@@ -279,7 +281,7 @@ const ProductFormPage: React.FC = () => {
             {!validation.isValid && (
               <IonText color="medium">
                 <p className="ion-text-center">
-                  <small>Complete los campos para poder guardar.</small>
+                  <small>Para guardar, revise: {pendingFields.join(', ')}.</small>
                 </p>
               </IonText>
             )}
