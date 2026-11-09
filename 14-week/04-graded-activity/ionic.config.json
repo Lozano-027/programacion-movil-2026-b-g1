@@ -1,0 +1,7 @@
+{
+  "name": "app-semana14",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
